@@ -1,10 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import {
-  BlockEditorProvider,
-  BlockList,
-  Inserter,
-} from "@wordpress/block-editor";
+import { BlockEditorProvider } from "@wordpress/block-editor";
+import Navbar from "./components/Navbar.js";
+import ContentCanvas from "./components/ContentCanvas.js";
 import {
   Button,
   TextControl,
@@ -14,18 +12,7 @@ import {
 } from "@wordpress/components";
 import "@wordpress/components/build-style/style.css";
 import { registerBlockType } from "@wordpress/blocks";
-import {
-  BlockEditorProviderStyle,
-  ContentCanvasStyle,
-} from "./styles/style.js";
-import { BlockInserterStyle } from "./styles/style.js";
 import { SettingsPanelStyle } from "./styles/style.js";
-
-// export
-import { serialize } from "@wordpress/blocks";
-import { useSelect } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
-import Navbar from "./components/Navbar.js";
 
 function App() {
   const [blocksState, setBlocksState] = useState([]);
@@ -370,20 +357,16 @@ function App() {
         settings={{}}
       >
         <Navbar blockContent={blockContent} />
-        <div style={{ display: "flex", border: "2px solid red" }}>
-          {/* Content Canvas (Where Blocks Appear) */}
-          <div style={ContentCanvasStyle}>
-            <BlockList />
-          </div>
 
-          {/* TODO: Settings Panel (For Selected Blocks */}
-          {/* <div style={SettingsPanelStyle}>
+        <ContentCanvas />
+
+        {/* TODO: Settings Panel (For Selected Blocks */}
+        {/* <div style={SettingsPanelStyle}>
             <h3>Block Settings</h3>
             <PanelBody title="Block Settings" initialOpen={true}>
               <Button variant="primary">Save Block</Button>
             </PanelBody>
           </div> */}
-        </div>
       </BlockEditorProvider>
     </div>
   );

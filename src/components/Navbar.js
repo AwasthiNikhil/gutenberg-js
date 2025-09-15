@@ -9,9 +9,11 @@ const Navbar = ({blockContent}) => {
     const html = serialize(blockContent);
     const blob = new Blob([html], { type: "text/html" });
     const url = URL.createObjectURL(blob);
+
+    // TODO: replace later with wordpress backend API
     const link = document.createElement("a");
     link.href = url;
-    link.download = "export.html";
+    link.download = "page.html";
     link.click();
   };
 
@@ -22,6 +24,7 @@ const Navbar = ({blockContent}) => {
     newWindow.document.close();
   };
 
+  // render
   return (
     <div
       style={{
