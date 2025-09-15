@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { BlockEditorProvider } from "@wordpress/block-editor";
 import Navbar from "./components/Navbar.js";
 import ContentCanvas from "./components/ContentCanvas.js";
+import { registerAllBlocks } from "./blocks";
+
 import {
   Button,
   TextControl,
@@ -19,210 +21,7 @@ function App() {
   const blockContent = blocksState;
 
   const blocks = [
-    {
-      name: "myplugin/paragraph",
-      title: "Paragraph",
-      icon: "paragraph",
-      category: "text",
-      attributes: {
-        content: {
-          type: "string",
-          default: "",
-        },
-      },
 
-      edit: ({ attributes, setAttributes }) => (
-        <div>
-          <TextareaControl
-            label="Content"
-            value={attributes.content}
-            onChange={(value) => setAttributes({ content: value })}
-          />
-        </div>
-      ),
-      save: ({ attributes }) => <p>{attributes.content}</p>,
-    },
-    {
-      name: "myplugin/heading",
-      title: "Heading",
-      icon: "editor-heading",
-      category: "text",
-      attributes: {
-        level: {
-          type: "number",
-          default: 1,
-        },
-        content: {
-          type: "string",
-          default: "Heading text",
-        },
-      },
-      edit: ({ attributes, setAttributes }) => (
-        <div>
-          <SelectControl
-            label="Heading Level"
-            value={attributes.level}
-            options={[
-              { label: "H1", value: 1 },
-              { label: "H2", value: 2 },
-              { label: "H3", value: 3 },
-              { label: "H4", value: 4 },
-              { label: "H5", value: 5 },
-              { label: "H6", value: 6 },
-            ]}
-            onChange={(value) => setAttributes({ level: parseInt(value) })}
-          />
-          <TextareaControl
-            label="Heading Content"
-            value={attributes.content}
-            onChange={(value) => setAttributes({ content: value })}
-          />
-        </div>
-      ),
-      save: ({ attributes }) => {
-        const Tag = `h${attributes.level}`;
-        return <Tag>{attributes.content}</Tag>;
-      },
-    },
-    {
-      name: "myplugin/list",
-      title: "List",
-      icon: "editor-ul",
-      category: "text",
-      attributes: {
-        items: {
-          type: "array",
-          default: ["Item 1", "Item 2"],
-        },
-      },
-      edit: ({ attributes, setAttributes }) => (
-        <div>
-          {attributes.items.map((item, index) => (
-            <TextControl
-              key={index}
-              label={`Item ${index + 1}`}
-              value={item}
-              onChange={(value) => {
-                const newItems = [...attributes.items];
-                newItems[index] = value;
-                setAttributes({ items: newItems });
-              }}
-            />
-          ))}
-          <Button
-            onClick={() =>
-              setAttributes({ items: [...attributes.items, "New Item"] })
-            }
-          >
-            Add Item
-          </Button>
-        </div>
-      ),
-      save: ({ attributes }) => (
-        <ul>
-          {attributes.items.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      ),
-    },
-    {
-      name: "myplugin/quote",
-      title: "Quote",
-      icon: "format-quote",
-      category: "text",
-      attributes: {
-        content: {
-          type: "string",
-          default: "This is a quote.",
-        },
-      },
-      edit: ({ attributes, setAttributes }) => (
-        <div>
-          <TextareaControl
-            label="Quote Content"
-            value={attributes.content}
-            onChange={(value) => setAttributes({ content: value })}
-          />
-        </div>
-      ),
-      save: ({ attributes }) => <blockquote>{attributes.content}</blockquote>,
-    },
-    {
-      name: "myplugin/code",
-      title: "Code",
-      icon: "editor-code",
-      category: "text",
-      attributes: {
-        content: {
-          type: "string",
-          default: 'console.log("Hello World");',
-        },
-      },
-      edit: ({ attributes, setAttributes }) => (
-        <div>
-          <TextareaControl
-            label="Code"
-            value={attributes.content}
-            onChange={(value) => setAttributes({ content: value })}
-          />
-        </div>
-      ),
-      save: ({ attributes }) => (
-        <pre>
-          <code>{attributes.content}</code>
-        </pre>
-      ),
-    },
-    {
-      name: "myplugin/details",
-      title: "Details",
-      icon: "visibility",
-      category: "text",
-      attributes: {
-        content: {
-          type: "string",
-          default: "Click to reveal more...",
-        },
-      },
-      edit: ({ attributes, setAttributes }) => (
-        <div>
-          <TextareaControl
-            label="Details Content"
-            value={attributes.content}
-            onChange={(value) => setAttributes({ content: value })}
-          />
-        </div>
-      ),
-      save: ({ attributes }) => (
-        <details>
-          <summary>{attributes.content}</summary>
-          <p>Here are the details!</p>
-        </details>
-      ),
-    },
-    {
-      name: "myplugin/preformatted",
-      title: "Preformatted",
-      icon: "editor-underline",
-      category: "text",
-      attributes: {
-        content: {
-          type: "string",
-          default: "Preformatted text...",
-        },
-      },
-      edit: ({ attributes, setAttributes }) => (
-        <div>
-          <TextareaControl
-            label="Preformatted Text"
-            value={attributes.content}
-            onChange={(value) => setAttributes({ content: value })}
-          />
-        </div>
-      ),
-      save: ({ attributes }) => <pre>{attributes.content}</pre>,
-    },
     {
       name: "myplugin/pullquote",
       title: "Pullquote",
@@ -344,7 +143,13 @@ function App() {
     },
   ];
 
-  blocks.forEach((block) => registerBlockType(block.name, block));
+  // blocks.forEach((block) => registerBlockType(block.name, block));
+
+  useEffect(() => {
+    registerAllBlocks();
+  }, []);
+  
+
 
   return (
     <div style={{ padding: "20px" }}>
