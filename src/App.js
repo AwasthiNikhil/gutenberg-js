@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react"; 
+import { useState } from "react";
 import {
   BlockEditorProvider,
   BlockList,
@@ -25,46 +25,11 @@ import { SettingsPanelStyle } from "./styles/style.js";
 import { serialize } from "@wordpress/blocks";
 import { useSelect } from "@wordpress/data";
 import { store as blockEditorStore } from "@wordpress/block-editor";
+import Navbar from "./components/Navbar.js";
 
 function App() {
-  // Register a simple block
-  // registerBlockType("myplugin/my-block", {
-  //   title: "My Custom Block",
-  //   icon: "smiley",
-  //   category: "common",
-  //   attributes: {
-  //     text: { type: "string", default: "Hello, World!" },
-  //   },
-  //   edit: (props) => {
-  //     const { attributes, setAttributes } = props;
-  //     return (
-  //       <div>
-  //         <InspectorControls>
-  //           <PanelBody title="Block Settings">
-  //             <TextControl
-  //               label="Enter some text"
-  //               value={attributes.text}
-  //               onChange={(value) => setAttributes({ text: value })}
-  //             />
-  //           </PanelBody>
-  //         </InspectorControls>
-  //         <p>{attributes.text}</p>
-  //       </div>
-  //     );
-  //   },
-  //   save: (props) => {
-  //     return <p>{props.attributes.text}</p>;
-  //   },
-  // });
-  // return (
-  //   <div style={{ padding: "20px" }}>
-  //     <h1>My Custom Gutenberg-like Editor</h1>
-  //     <BlockEditorProvider>
-  //       <BlockList />
-  //     </BlockEditorProvider>
-  //   </div>
-  // );
   const [blocksState, setBlocksState] = useState([]);
+  const blockContent = blocksState;
 
   const blocks = [
     {
@@ -74,11 +39,11 @@ function App() {
       category: "text",
       attributes: {
         content: {
-          type: 'string',
-          default: ''
-        }
+          type: "string",
+          default: "",
+        },
       },
-      
+
       edit: ({ attributes, setAttributes }) => (
         <div>
           <TextareaControl
@@ -394,68 +359,32 @@ function App() {
 
   blocks.forEach((block) => registerBlockType(block.name, block));
 
-  // const blockContent = useSelect(
-  //   (select) => select(blockEditorStore).getBlocks(),
-  //   []
-  // );
-  const blockContent = blocksState;
-  
-  const handleExport = () => {
-    const html = serialize(blockContent);
-    const blob = new Blob([html], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "export.html";
-    link.click();
-  };
-  
-  const handleView = () => {
-    const html = serialize(blockContent);
-    const newWindow = window.open();
-    newWindow.document.write(html);
-    newWindow.document.close();
-  };
-
   return (
     <div style={{ padding: "20px" }}>
       <h1>Gutenberg Editor</h1>
-
       {/* Block Editor Provider */}
       <BlockEditorProvider
         value={blocksState}
         onInput={setBlocksState}
         onChange={setBlocksState}
-        settings={{}}>
+        settings={{}}
+      >
+        <Navbar blockContent={blockContent} />
         <div style={{ display: "flex", border: "2px solid red" }}>
-          {/* Block Inserter */}
-          <div style={BlockInserterStyle}>
-            <h3>Block Inserter</h3>
-            <Inserter />
-          </div>
-
           {/* Content Canvas (Where Blocks Appear) */}
           <div style={ContentCanvasStyle}>
             <BlockList />
           </div>
 
-          {/* Settings Panel (For Selected Blocks) */}
-          <div style={SettingsPanelStyle}>
+          {/* TODO: Settings Panel (For Selected Blocks */}
+          {/* <div style={SettingsPanelStyle}>
             <h3>Block Settings</h3>
             <PanelBody title="Block Settings" initialOpen={true}>
-              <Button isPrimary>Save Block</Button>
+              <Button variant="primary">Save Block</Button>
             </PanelBody>
-          </div>
+          </div> */}
         </div>
       </BlockEditorProvider>
-
-      {/* Export */}
-      <div style={{ marginBottom: "20px" }}>
-        <Button isSecondary style={{ marginRight: "10px" }} onClick={handleView}>
-          View HTML
-        </Button>
-        <Button isPrimary onClick={handleExport}>Export HTML</Button>
-      </div>
     </div>
   );
 }
