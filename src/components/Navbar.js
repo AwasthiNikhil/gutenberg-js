@@ -1,4 +1,3 @@
-import React from "react";
 import { Inserter } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
 import { serialize } from "@wordpress/blocks";
