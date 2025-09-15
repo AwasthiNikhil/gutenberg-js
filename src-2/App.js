@@ -13,52 +13,9 @@ import {
 } from "@wordpress/components";
 import "@wordpress/components/build-style/style.css";
 import { registerBlockType } from "@wordpress/blocks";
-import {
-  BlockEditorProviderStyle,
-  ContentCanvasStyle,
-} from "./styles/style.js";
-import { BlockInserterStyle } from "./styles/style.js";
-import { SettingsPanelStyle } from "./styles/style.js";
 
 function App() {
-  // Register a simple block
-  // registerBlockType("myplugin/my-block", {
-  //   title: "My Custom Block",
-  //   icon: "smiley",
-  //   category: "common",
-  //   attributes: {
-  //     text: { type: "string", default: "Hello, World!" },
-  //   },
-  //   edit: (props) => {
-  //     const { attributes, setAttributes } = props;
-  //     return (
-  //       <div>
-  //         <InspectorControls>
-  //           <PanelBody title="Block Settings">
-  //             <TextControl
-  //               label="Enter some text"
-  //               value={attributes.text}
-  //               onChange={(value) => setAttributes({ text: value })}
-  //             />
-  //           </PanelBody>
-  //         </InspectorControls>
-  //         <p>{attributes.text}</p>
-  //       </div>
-  //     );
-  //   },
-  //   save: (props) => {
-  //     return <p>{props.attributes.text}</p>;
-  //   },
-  // });
-  // return (
-  //   <div style={{ padding: "20px" }}>
-  //     <h1>My Custom Gutenberg-like Editor</h1>
-  //     <BlockEditorProvider>
-  //       <BlockList />
-  //     </BlockEditorProvider>
-  //   </div>
-  // );
-
+  
   const blocks = [
     {
       name: "myplugin/paragraph",
@@ -388,18 +345,18 @@ function App() {
       <BlockEditorProvider>
         <div style={{ display: "flex", border: "2px solid red" }}>
           {/* Block Inserter */}
-          <div style={BlockInserterStyle}>
+          <div >
             <h3>Block Inserter</h3>
             <Inserter />
           </div>
 
           {/* Content Canvas (Where Blocks Appear) */}
-          <div style={ContentCanvasStyle}>
+          <div >
             <BlockList />
           </div>
 
           {/* Settings Panel (For Selected Blocks) */}
-          <div style={SettingsPanelStyle}>
+          <div >
             <h3>Block Settings</h3>
             <PanelBody title="Block Settings" initialOpen={true}>
               <Button isPrimary>Save Block</Button>
