@@ -1,25 +1,29 @@
 import { TextareaControl } from "@wordpress/components";
 
-export const name = "myplugin/paragraph";
+export const name = "myplugin/verse";
 
 export const settings = {
-  title: "Paragraph",
-  icon: "paragraph",
+  title: "Verse",
+  icon: "editor-quote",
   category: "text",
   attributes: {
     content: {
       type: "string",
-      default: "",
+      default: "Roses are red, violets are blue...",
     },
   },
   edit: ({ attributes, setAttributes }) => (
     <div>
       <TextareaControl
-        label="Content"
+        label="Verse"
         value={attributes.content}
         onChange={(value) => setAttributes({ content: value })}
       />
     </div>
   ),
-  save: ({ attributes }) => <p>{attributes.content}</p>,
+  save: ({ attributes }) => (
+    <div style={{ fontFamily: "monospace", fontStyle: "italic" }}>
+      {attributes.content}
+    </div>
+  ),
 };
