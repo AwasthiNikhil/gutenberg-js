@@ -7,7 +7,6 @@ const ContentCanvas = () => {
       style={{
         flex: 1,
         border: "1px solid red",
-        minHeight: "100vh",
         padding: "10px",
       }}
     >
