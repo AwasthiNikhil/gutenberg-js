@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BlockEditorProvider } from "@wordpress/block-editor";
-import Navbar from "./components/Navbar.js";
-import ContentCanvas from "./components/ContentCanvas.js";
+import Navbar from "./components/Navbar";
+import ContentCanvas from "./components/ContentCanvas";
 import { registerAllBlocks } from "./blocks";
 
 import "@wordpress/components/build-style/style.css";
@@ -13,20 +12,18 @@ function App() {
     const blockContent = blocksState;
 
     useEffect(() => {
-        registerAllBlocks();
+        registerAllBlocks(); // Initialize all custom blocks if necessary
     }, []);
 
     return (
         <div style={{ padding: "20px" }}>
-            <h1>Gutenberg Editor</h1>
-
             <BlockEditorProvider
                 value={blocksState}
                 onInput={setBlocksState}
                 onChange={setBlocksState}
                 settings={{}}
             >
-                <Navbar blockContent={blockContent} />
+                <Navbar blockContent={blockContent} setBlocksState={setBlocksState} />
                 <ContentCanvas />
             </BlockEditorProvider>
         </div>

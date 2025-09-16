@@ -10,7 +10,6 @@ const ContentCanvas = () => {
       }}
     >
       <BlockList />
-
     </div>
   );
 };
