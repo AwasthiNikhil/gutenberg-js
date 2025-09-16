@@ -5,7 +5,7 @@ import ContentCanvas from "./components/ContentCanvas";
 import { registerAllBlocks } from "./blocks";
 
 import "@wordpress/components/build-style/style.css";
-import { SettingsPanelStyle } from "./styles/style.js";
+
 
 function App() {
     const [blocksState, setBlocksState] = useState([]);
@@ -16,7 +16,10 @@ function App() {
     }, []);
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{
+            border:"1px solid blue",
+            minHeight:"100vh"
+        }}>
             <BlockEditorProvider
                 value={blocksState}
                 onInput={setBlocksState}
