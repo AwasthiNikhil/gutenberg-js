@@ -24,11 +24,137 @@
     z-index: 1000; /* Ensures it stays on top of other content */
   }
   
+/* for main container area */
+.bodySkeleton{
+  display: flex;
+  
+}
+/* Main container for list view */
+.block-editor-list-view-tree {
+  width: 19vw;
+  height: 100vh;
+  overflow-y: hidden;
+  background-color: rgb(241, 241, 241);
+  border-right: 1px solid rgb(204, 204, 204);
+  padding: 10px;
+}
 
+/* Header for the list view */
+.block-editor-list-view-tree h3 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
 
+/* Styling for each block row */
+.block-editor-list-view-leaf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 5px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  /* transition: background-color 0.2s ease, transform 0.2s ease; */
+}
 
+.block-editor-list-view-leaf:hover {
+  background-color: #f7f7f7;
+  /* transform: scale(1.01); */
+}
 
+/* For selected block rows */
+.block-editor-list-view-leaf.is-selected {
+  background-color: #e1f5fe;
+  border-left: 5px solid #00bcd4;
+}
 
+.block-editor-list-view-leaf.is-first-selected {
+  border-top: 2px solid #00bcd4;
+}
+
+.block-editor-list-view-leaf.is-last-selected {
+  border-bottom: 2px solid #00bcd4;
+}
+
+/* Block contents cell */
+.block-editor-list-view-block__contents-cell {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  padding-left: 8px;
+}
+
+/* Block icon and label (title) */
+.block-editor-list-view-block__contents-container {
+  display: flex;
+  align-items: center;
+}
+
+.block-editor-list-view-block__expander {
+  margin-right: 10px;
+  fill: #5e5e5e;
+}
+
+.block-editor-list-view-block-select-button__title {
+  font-size: 1em;
+  font-weight: normal;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; /* Prevent long text from overflowing */
+}
+
+/* Styling for dropdown menu button */
+.components-dropdown-menu__toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.components-dropdown-menu__toggle svg {
+  fill: #5e5e5e;
+  width: 20px;
+  height: 20px;
+}
+
+/* Draggable chip (hidden by default) */
+.components-draggable-drag-component-root {
+  display: none;
+}
+
+.block-editor-block-draggable-chip-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.block-editor-block-draggable-chip__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Styling for the icons */
+.block-editor-block-icon {
+  margin-right: 8px;
+}
+
+.block-editor-block-settings-menu {
+  margin-left: 10px;
+}
+
+/* Accessibility descriptions */
+#list-view-block-select-button__description-1,
+#list-view-block-select-button__description-3 {
+  visibility: hidden;
+}
   
 .block-editor-block-breadcrumb {
     list-style-type: none;

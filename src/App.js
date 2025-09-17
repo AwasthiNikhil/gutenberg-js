@@ -52,32 +52,26 @@ function App() {
         setBlocksState(nextState);
     };
 
-    const toggleSidebar= ()=>setSidebarOpen(!isSidebarOpen);
+    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
     return (
-        // <div style={{
-        //     border: "1px solid blue",
-        //     minHeight: "99vh",
-        //     maxHeight: "99vh",
-        //     overflowY: "hidden",
-        // }}>
+
         <BlockEditorProvider
             value={blocksState}
             onInput={handleStateChange}
             onChange={handleStateChange}
             settings={{}}
         >
-            <Navbar className="navbar" blockContent={blockContent}  handleUndo={handleUndo} handleRedo={handleRedo} toggleSidebar={toggleSidebar} />
-            <div>
-           { isSidebarOpen && <Sidebar/>}
-            <ContentCanvas />
+            <Navbar className="navbar" blockContent={blockContent} handleUndo={handleUndo} handleRedo={handleRedo} toggleSidebar={toggleSidebar} />
+            <div className="bodySkeleton">
+                {isSidebarOpen && <Sidebar />}
+                <ContentCanvas />
             </div>
-            
+
             <ButtonBlockAppender />
 
             <EditorFooter />
         </BlockEditorProvider>
-        // </div>
     );
 }
 
