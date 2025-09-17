@@ -3,8 +3,10 @@ import { BlockEditorProvider } from "@wordpress/block-editor";
 import Navbar from "./components/Navbar";
 import ContentCanvas from "./components/ContentCanvas";
 import { registerAllBlocks } from "./blocks";
-
+import EditorFooter from "./components/EditorFooter";
+import "./index.css";
 import "@wordpress/components/build-style/style.css";
+import { ButtonBlockAppender } from "@wordpress/block-editor/";
 
 
 function App() {
@@ -50,21 +52,26 @@ function App() {
     };
 
     return (
-        <div style={{
-            border: "1px solid blue",
-            minHeight: "100vh",
-            overflowY: "auto",
-        }}>
-            <BlockEditorProvider
-                value={blocksState}
-                onInput={handleStateChange}
-                onChange={handleStateChange}
-                settings={{}}
-            >
-                <Navbar blockContent={blockContent} handleStateChange={handleStateChange} handleUndo={handleUndo} handleRedo={handleRedo} />
-                <ContentCanvas />
-            </BlockEditorProvider>
-        </div>
+        // <div style={{
+        //     border: "1px solid blue",
+        //     minHeight: "99vh",
+        //     maxHeight: "99vh",
+        //     overflowY: "hidden",
+        // }}>
+        <BlockEditorProvider
+            value={blocksState}
+            onInput={handleStateChange}
+            onChange={handleStateChange}
+            settings={{}}
+        >
+            <Navbar className="navbar" blockContent={blockContent} handleStateChange={handleStateChange} handleUndo={handleUndo} handleRedo={handleRedo} />
+            <ContentCanvas />
+            
+            <ButtonBlockAppender />
+
+            <EditorFooter />
+        </BlockEditorProvider>
+        // </div>
     );
 }
 

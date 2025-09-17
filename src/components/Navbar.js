@@ -18,6 +18,7 @@ const Navbar = ({ blockContent, handleStateChange, handleUndo, handleRedo }) => 
 
     const handleView = () => {
         const html = serialize(blockContent);
+        console.log(html)
         const newWindow = window.open();
         newWindow.document.body.innerHTML = html;
         newWindow.document.close();
@@ -51,8 +52,6 @@ const Navbar = ({ blockContent, handleStateChange, handleUndo, handleRedo }) => 
 
                     </ToggleGroupControl>
                 </div>
-                {/* <ListView/> */}
-
             </div>
             <div>
                 <Button
@@ -71,3 +70,4 @@ const Navbar = ({ blockContent, handleStateChange, handleUndo, handleRedo }) => 
 };
 
 export default Navbar;
+

@@ -1,4 +1,4 @@
-import { TextareaControl } from "@wordpress/components";
+import { BlockEdit, RichText } from "@wordpress/block-editor";
 
 export const name = "myplugin/paragraph";
 
@@ -10,18 +10,29 @@ export const settings = {
   attributes: {
     content: {
       type: "string",
+      source: "html",
+      selector:"p",
       default: "",
     },
   },
 
   edit: ({ attributes, setAttributes }) => (
     <div>
-      <TextareaControl
-        label="Content"
+
+      <RichText
+        tagName="p"
         value={attributes.content}
-        onChange={(value) => setAttributes({ content: value })}
+        onChange={(content) => setAttributes({ content })}
+        placeholder="Write your paragraph..."
+        label="Content"
+        style={{
+          outline: "1px solid red",
+          padding: "10px"
+        }}
       />
     </div>
   ),
-  save: ({ attributes }) => <p>{attributes.content}</p>,
+  save: ({ attributes }) => {
+    return <RichText.Content tagName="p" value={attributes.content} />;
+  },
 };
