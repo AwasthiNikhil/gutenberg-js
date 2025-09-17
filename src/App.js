@@ -7,14 +7,15 @@ import EditorFooter from "./components/EditorFooter";
 import "./index.css";
 import "@wordpress/components/build-style/style.css";
 import { ButtonBlockAppender } from "@wordpress/block-editor/";
-
+import Sidebar from "./components/Sidebar";
 
 function App() {
     const [blocksState, setBlocksState] = useState([]);
     const [undoStack, setUndoStack] = useState([]);
     const [redoStack, setRedoStack] = useState([]);
-    const blockContent = blocksState;
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
 
+    const blockContent = blocksState;
 
     useEffect(() => {
         registerAllBlocks(); // Initialize all custom blocks if necessary
@@ -51,6 +52,8 @@ function App() {
         setBlocksState(nextState);
     };
 
+    const toggleSidebar= ()=>setSidebarOpen(!isSidebarOpen);
+
     return (
         // <div style={{
         //     border: "1px solid blue",
@@ -64,8 +67,11 @@ function App() {
             onChange={handleStateChange}
             settings={{}}
         >
-            <Navbar className="navbar" blockContent={blockContent} handleStateChange={handleStateChange} handleUndo={handleUndo} handleRedo={handleRedo} />
+            <Navbar className="navbar" blockContent={blockContent}  handleUndo={handleUndo} handleRedo={handleRedo} toggleSidebar={toggleSidebar} />
+            <div>
+           { isSidebarOpen && <Sidebar/>}
             <ContentCanvas />
+            </div>
             
             <ButtonBlockAppender />
 
