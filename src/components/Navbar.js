@@ -25,6 +25,54 @@ const Navbar = ({ blockContent, handleUndo, handleRedo, toggleSidebar }) => {
         newWindow.document.close();
     };
 
+    const handleSave = async () => {
+        // Assuming blockContent is an object containing the block content data
+        const html = serialize(blockContent);  // Serialize the block content (to HTML)
+
+        // Prepare the data to be sent to WordPress API
+        const data = {
+            content: html,  
+            title: 'Title',  
+            excerpt: '',  
+        };
+
+        // Add your Bearer token here
+        const BEARER_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3AtZGVtby50ZXN0IiwiaWF0IjoxNzU4MTcwMzYzLCJuYmYiOjE3NTgxNzAzNjMsImV4cCI6MTc1ODc3NTE2MywiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.LdKVdYxaiwspp3vo9A8aDAgnHziV4nHFvW-tMH10bEk';
+
+        try {
+            // Make the POST request to WordPress API to create the post
+            const response = await fetch('/wp-json/wp/v2/posts', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${BEARER_TOKEN}`,  // Include the Bearer token for authentication
+                    'Content-Type': 'application/json',  // Set content type to JSON
+                },
+                body: JSON.stringify(data),  // Send the data in the request body
+            });
+
+            // Check if the response is successful
+            if (!response.ok) {
+                // If the response is not OK, throw an error
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to create post');
+            }
+
+            // If the request was successful, parse the response JSON
+            const responseData = await response.json();
+
+            // Handle the success response (e.g., redirect to the newly created post)
+            console.log('Post created successfully:', responseData);
+            alert('Post created successfully!');
+
+            // Optionally redirect the user or clear any form
+            // window.location.href = responseData.link;  // Redirect to the new post page
+        } catch (error) {
+            // Handle errors (e.g., failed request or invalid response)
+            console.error('Error creating post:', error);
+            alert('Failed to create post: ' + error.message);
+        }
+    };
+
 
     // render
     return (
@@ -58,12 +106,12 @@ const Navbar = ({ blockContent, handleUndo, handleRedo, toggleSidebar }) => {
                 </div>
             </div>
             <div style={{
-                display:"flex"
+                display: "flex"
             }}>
-            <ToggleGroupControl>
-                <Button>Save</Button>
-                <Button>Load</Button>
-            </ToggleGroupControl>
+                <ToggleGroupControl>
+                    <Button onClick={handleSave}>Save</Button>
+                    <Button>Load</Button>
+                </ToggleGroupControl>
                 <Button
                     variant="secondary"
                     style={{ marginRight: "10px" }}

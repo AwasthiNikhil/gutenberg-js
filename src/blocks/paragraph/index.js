@@ -1,5 +1,5 @@
 import { BlockEdit, RichText } from "@wordpress/block-editor";
-
+// import { Placeholder } from '@wordpress/components';
 export const name = "core/paragraph";
 
 export const settings = {
@@ -18,12 +18,12 @@ export const settings = {
 
   edit: ({ attributes, setAttributes }) => (
     <div>
+      {/* <Placeholder  label="Paragraph" /> */}
 
       <RichText
         tagName="p"
         value={attributes.content}
         onChange={(content) => setAttributes({ content })}
-        placeholder="Write your paragraph..."
         label="Content"
         style={{
           outline: "1px solid red",

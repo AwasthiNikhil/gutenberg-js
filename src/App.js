@@ -8,6 +8,7 @@ import ContentCanvas from "./components/ContentCanvas";
 import EditorFooter from "./components/EditorFooter";
 import "@wordpress/components/build-style/style.css";
 import Sidebar from "./components/Sidebar";
+import LoadWindow from "./components/LoadWindow";
 // import "./css/style.min.css";
 // import "./css/editor.min.css";
 // import "./css/content.min.css";
@@ -58,6 +59,7 @@ function App() {
 
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
+    // return (<LoadWindow/>);
     return (
 
         <BlockEditorProvider
