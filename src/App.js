@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import { BlockEditorProvider } from "@wordpress/block-editor";
-import Navbar from "./components/Navbar";
-import ContentCanvas from "./components/ContentCanvas";
 import { registerAllBlocks } from "./blocks";
-import EditorFooter from "./components/EditorFooter";
+import Navbar from "./components/Navbar";
+import { BlockEditorProvider, ButtonBlockAppender } from "@wordpress/block-editor";
 import "./index.css";
+import { Modal } from "@wordpress/components";
+import ContentCanvas from "./components/ContentCanvas";
+import EditorFooter from "./components/EditorFooter";
 import "@wordpress/components/build-style/style.css";
-import { ButtonBlockAppender } from "@wordpress/block-editor/";
 import Sidebar from "./components/Sidebar";
+// import "./css/style.min.css";
+// import "./css/editor.min.css";
+// import "./css/content.min.css";
+
 
 function App() {
     const [blocksState, setBlocksState] = useState([]);
@@ -64,6 +68,9 @@ function App() {
         >
             <Navbar className="navbar" blockContent={blockContent} handleUndo={handleUndo} handleRedo={handleRedo} toggleSidebar={toggleSidebar} />
             <div className="bodySkeleton">
+                {/* {isSidebarOpen && <Modal onRequestClose={() => {
+                    setSidebarOpen(false);
+                }} />} */}
                 {isSidebarOpen && <Sidebar />}
                 <ContentCanvas />
             </div>

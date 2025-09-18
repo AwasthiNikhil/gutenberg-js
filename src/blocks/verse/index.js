@@ -1,6 +1,6 @@
 import { TextareaControl } from "@wordpress/components";
 
-export const name = "myplugin/verse";
+export const name = "core/verse";
 
 export const settings = {
   title: "Verse",

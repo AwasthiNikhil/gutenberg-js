@@ -1,6 +1,6 @@
 import { TextareaControl } from "@wordpress/components";
 
-export const name = "myplugin/preformatted";
+export const name = "core/preformatted";
 
 export const settings = {
   title: "Preformatted",

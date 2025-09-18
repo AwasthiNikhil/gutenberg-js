@@ -1,6 +1,6 @@
 import { TextControl, Button } from "@wordpress/components";
 
-export const name = "myplugin/gallery";
+export const name = "core/gallery";
 
 export const settings = {
   title: "Gallery",

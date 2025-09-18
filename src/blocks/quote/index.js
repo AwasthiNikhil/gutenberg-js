@@ -1,6 +1,6 @@
 import { TextareaControl } from "@wordpress/components";
 
-export const name = "myplugin/quote";
+export const name = "core/quote";
 
 export const settings = {
   title: "Quote",

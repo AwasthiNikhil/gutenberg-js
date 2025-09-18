@@ -4,11 +4,7 @@ import { BlockList } from "@wordpress/block-editor";
 const ContentCanvas = () => {
   return (
     <div
-      style={{
-        flex: 1,
-        border: "1px solid red",
-        padding: "10px",
-      }}
+     className="contentCanvas"
     >
       <BlockList />
     </div>

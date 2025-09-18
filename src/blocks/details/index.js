@@ -1,6 +1,6 @@
 import { TextareaControl } from "@wordpress/components";
 
-export const name = "myplugin/details";
+export const name = "core/details";
 
 export const settings = {
   title: "Details",

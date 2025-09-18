@@ -29,11 +29,18 @@
   display: flex;
   
 }
+
+.contentCanvas{
+  flex: 1;
+  border: 1px solid red;
+  padding: 10px;
+}
 /* Main container for list view */
 .block-editor-list-view-tree {
   width: 19vw;
   height: 100vh;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
   background-color: rgb(241, 241, 241);
   border-right: 1px solid rgb(204, 204, 204);
   padding: 10px;

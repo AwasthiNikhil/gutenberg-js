@@ -1,5 +1,5 @@
 
-export const name = "myplugin/file";
+export const name = "core/file";
 
 export const settings = {
   title: "File",

@@ -1,5 +1,5 @@
 
-export const name = "myplugin/video";
+export const name = "core/video";
 
 export const settings = {
   title: "Video",

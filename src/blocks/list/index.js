@@ -1,6 +1,6 @@
 import { TextControl, Button } from "@wordpress/components";
 
-export const name = "myplugin/list";
+export const name = "core/list";
 
 export const settings = {
   title: "List",

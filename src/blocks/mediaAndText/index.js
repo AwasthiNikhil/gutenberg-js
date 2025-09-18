@@ -1,6 +1,6 @@
 import { TextControl, Button } from "@wordpress/components";
 
-export const name = "myplugin/media-and-text";
+export const name = "myplugcorein/media-and-text";
 
 export const settings = {
   title: "Media & Text",

@@ -1,6 +1,6 @@
 import { TextareaControl } from "@wordpress/components";
 
-export const name = "myplugin/pullquote";
+export const name = "core/pullquote";
 
 export const settings = {
   title: "Pullquote",

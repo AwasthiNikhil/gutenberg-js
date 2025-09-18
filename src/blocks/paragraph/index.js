@@ -1,6 +1,6 @@
 import { BlockEdit, RichText } from "@wordpress/block-editor";
 
-export const name = "myplugin/paragraph";
+export const name = "core/paragraph";
 
 export const settings = {
   title: "Paragraph",

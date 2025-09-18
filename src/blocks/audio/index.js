@@ -1,5 +1,5 @@
 
-export const name = "myplugin/audio";
+export const name = "core/audio";
 
 export const settings = {
   title: "Audio",

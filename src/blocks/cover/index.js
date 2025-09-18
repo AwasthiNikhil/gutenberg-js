@@ -1,6 +1,6 @@
 import { TextControl, Button } from "@wordpress/components";
 
-export const name = "myplugin/cover";
+export const name = "core/cover";
 
 export const settings = {
   title: "Cover",

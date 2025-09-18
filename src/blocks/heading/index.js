@@ -1,7 +1,7 @@
 
 import { TextareaControl, SelectControl } from "@wordpress/components";
 
-export const name = "myplugin/heading";
+export const name = "core/heading";
 
 export const settings = {
   title: "Heading",
@@ -10,7 +10,7 @@ export const settings = {
   attributes: {
     level: {
       type: "number",
-      default: 1,
+      default: 2,
     },
     content: {
       type: "string",
@@ -32,7 +32,6 @@ export const settings = {
         ]}
         onChange={(value) => setAttributes({ level: parseInt(value) })}
       /> */}
-
 
       <TextareaControl
         label="Heading Content"

@@ -1,6 +1,6 @@
 import { TextControl, Button } from "@wordpress/components";
 
-export const name = "myplugin/table";
+export const name = "core/table";
 
 export const settings = {
   title: "Table",

@@ -1,6 +1,6 @@
 import { TextControl, Button } from "@wordpress/components";
 
-export const name = "myplugin/image";
+export const name = "core/image";
 
 export const settings = {
   title: "Image",
