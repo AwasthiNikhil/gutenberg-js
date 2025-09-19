@@ -3,6 +3,9 @@ import { Button } from "@wordpress/components";
 import { __experimentalToggleGroupControl as ToggleGroupControl } from "@wordpress/components";
 import { serialize } from "@wordpress/blocks";
 import { useState } from "react";
+import '@wordpress/components/build-style/style.css';
+import '@wordpress/commands/build-style/style.css';
+
 
 const Navbar = ({ title, blockContent, handleUndo, handleRedo, toggleSidebar }) => {
     // functions
@@ -103,6 +106,9 @@ const Navbar = ({ title, blockContent, handleUndo, handleRedo, toggleSidebar }) 
                         <Button onClick={toggleSidebar}><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true" focusable="false"><path d="M3 6h11v1.5H3V6Zm3.5 5.5h11V13h-11v-1.5ZM21 17H10v1.5h11V17Z"></path></svg></Button>
                     </ToggleGroupControl>
                 </div>
+            </div>
+            <div>
+
             </div>
             <div style={{
                 display: "flex"

@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import { registerAllBlocks } from "./blocks";
 import Navbar from "./components/Navbar";
-import { BlockEditorProvider, ButtonBlockAppender } from "@wordpress/block-editor";
+import { BlockEditorProvider, ButtonBlockAppender, BlockCanvas } from "@wordpress/block-editor";
 import "./index.css";
 import { Modal } from "@wordpress/components";
 import ContentCanvas from "./components/ContentCanvas";
 import EditorFooter from "./components/EditorFooter";
 import "@wordpress/components/build-style/style.css";
 import Sidebar from "./components/Sidebar";
+import { parse } from '@wordpress/block-serialization-default-parser';
 import LoadWindow from "./components/LoadWindow";
-
-// import "./css/style.min.css";
-// import "./css/editor.min.css";
-// import "./css/content.min.css";
-
+import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
 
 function App() {
     const [title, setTitle] = useState("Title");
@@ -62,6 +60,13 @@ function App() {
         setBlocksState(nextState);
     };
 
+    // const queryParams = { include: [1,2,3] }; // Return posts with ID = 1,2,3.
+
+    // apiFetch( { path: addQueryArgs( 'http://wp-demo.test/wp/v2/posts', queryParams ) } ).then( ( posts ) => {
+    //     console.log( posts );
+    // } );
+
+
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
     const html = `
         <!-- wp:heading -->
@@ -72,7 +77,10 @@ function App() {
         <p class="wp-block-paragraph">sADA</p>
         <!-- /wp:paragraph -->
     `;
+    // return ("")
     // return (<LoadWindow/>);
+
+
     return (
 
         <BlockEditorProvider
@@ -81,6 +89,7 @@ function App() {
             onChange={handleStateChange}
             settings={{}}
         >
+
             <Navbar className="navbar" title={title} blockContent={blockContent} handleUndo={handleUndo} handleRedo={handleRedo} toggleSidebar={toggleSidebar} />
             <div className="bodySkeleton">
                 {/* {isSidebarOpen && <Modal onRequestClose={() => {
