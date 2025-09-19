@@ -4,22 +4,21 @@ import { __experimentalToggleGroupControl as ToggleGroupControl } from "@wordpre
 import { serialize } from "@wordpress/blocks";
 import { useState } from "react";
 
-const Navbar = ({ blockContent, handleUndo, handleRedo, toggleSidebar }) => {
+const Navbar = ({ title, blockContent, handleUndo, handleRedo, toggleSidebar }) => {
     // functions
     const handleExport = () => {
         const html = serialize(blockContent);
-        const blob = new Blob([html], { type: "text/html" });
-        const url = URL.createObjectURL(blob);
-        // replace later with wordpress backend API
+        const blob = new Blob([html], { type: "text" });
         const link = document.createElement("a");
-        link.href = url;
+        link.href = URL.createObjectURL(blob);
         link.download = "page.html";
         link.click();
     };
 
     const handleView = () => {
+        // console.log(blockContent);
         const html = serialize(blockContent);
-        console.log(html)
+        console.log(html);
         const newWindow = window.open();
         newWindow.document.body.innerHTML = html;
         newWindow.document.close();
@@ -31,9 +30,9 @@ const Navbar = ({ blockContent, handleUndo, handleRedo, toggleSidebar }) => {
 
         // Prepare the data to be sent to WordPress API
         const data = {
-            content: html,  
-            title: 'Title',  
-            excerpt: '',  
+            content: html,
+            title: title,
+            excerpt: '',
         };
 
         // Add your Bearer token here

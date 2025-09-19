@@ -9,12 +9,14 @@ import EditorFooter from "./components/EditorFooter";
 import "@wordpress/components/build-style/style.css";
 import Sidebar from "./components/Sidebar";
 import LoadWindow from "./components/LoadWindow";
+
 // import "./css/style.min.css";
 // import "./css/editor.min.css";
 // import "./css/content.min.css";
 
 
 function App() {
+    const [title, setTitle] = useState("Title");
     const [blocksState, setBlocksState] = useState([]);
     const [undoStack, setUndoStack] = useState([]);
     const [redoStack, setRedoStack] = useState([]);
@@ -26,6 +28,9 @@ function App() {
         registerAllBlocks(); // Initialize all custom blocks if necessary
     }, []);
 
+    const handleTitleChange = (title) => {
+        setTitle(title);
+    }
     const handleStateChange = (newState) => {
         // When a state change happens, push the current state to the undo stack
         setUndoStack((prevUndoStack) => [...prevUndoStack, blocksState]);
@@ -58,7 +63,15 @@ function App() {
     };
 
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+    const html = `
+        <!-- wp:heading -->
+        <h2 class="wp-block-heading">Heading text</h2>
+        <!-- /wp:heading -->
 
+        <!-- wp:paragraph -->
+        <p class="wp-block-paragraph">sADA</p>
+        <!-- /wp:paragraph -->
+    `;
     // return (<LoadWindow/>);
     return (
 
@@ -68,13 +81,13 @@ function App() {
             onChange={handleStateChange}
             settings={{}}
         >
-            <Navbar className="navbar" blockContent={blockContent} handleUndo={handleUndo} handleRedo={handleRedo} toggleSidebar={toggleSidebar} />
+            <Navbar className="navbar" title={title} blockContent={blockContent} handleUndo={handleUndo} handleRedo={handleRedo} toggleSidebar={toggleSidebar} />
             <div className="bodySkeleton">
                 {/* {isSidebarOpen && <Modal onRequestClose={() => {
                     setSidebarOpen(false);
                 }} />} */}
                 {isSidebarOpen && <Sidebar />}
-                <ContentCanvas />
+                <ContentCanvas title={title} handleTitleChange={handleTitleChange} />
             </div>
 
             <ButtonBlockAppender />

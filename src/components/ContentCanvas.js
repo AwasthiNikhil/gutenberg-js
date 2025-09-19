@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import { BlockList } from "@wordpress/block-editor";
 import { TextControl } from "@wordpress/components";
 
-const ContentCanvas = () => {
-
-  const [title, setTitle]= useState("Title");
-
+const ContentCanvas = ({ title, handleTitleChange }) => {
   return (
     <div
       className="contentCanvas"
     >
       <TextControl
         value={title}
-        onChange={(nextTitle) => setTitle(nextTitle ?? '')}
+        onChange={(nextTitle) => handleTitleChange(nextTitle ?? '')}
       />
       <BlockList />
     </div>

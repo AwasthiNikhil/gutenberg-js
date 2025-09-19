@@ -33,11 +33,12 @@ export const settings = {
         onChange={(value) => setAttributes({ level: parseInt(value) })}
       /> */}
 
-      <TextareaControl
-        label="Heading Content"
-        value={attributes.content}
-        onChange={(value) => setAttributes({ content: value })}
-      />
+        <TextareaControl
+          label="Heading Content"
+          value={attributes.content}
+          onChange={(value) => setAttributes({ content: value })}
+        />
+      
     </div>
   ),
   save: ({ attributes }) => {
