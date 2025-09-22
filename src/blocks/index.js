@@ -12,5 +12,5 @@ export const registerAllBlocks = () => {
       registerBlockType(name, settings);
     }
   });
-  // registerCoreBlocks();
+  registerCoreBlocks();
 };
