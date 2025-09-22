@@ -3,10 +3,11 @@ import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { FormFileUpload, TextControl, TextareaControl } from '@wordpress/components';
 
+
 registerBlockType('myplugin/team', {
     title: __('Team Member', 'myplugin'),
-    icon: 'id-alt',
-    category: 'common',
+    icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" focusable="false"><path d="M15.5 9.5a1 1 0 100-2 1 1 0 000 2zm0 1.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm-2.25 6v-2a2.75 2.75 0 00-2.75-2.75h-4A2.75 2.75 0 003.75 15v2h1.5v-2c0-.69.56-1.25 1.25-1.25h4c.69 0 1.25.56 1.25 1.25v2h1.5zm7-2v2h-1.5v-2c0-.69-.56-1.25-1.25-1.25H15v-1.5h2.5A2.75 2.75 0 0120.25 15zM9.5 8.5a1 1 0 11-2 0 1 1 0 012 0zm1.5 0a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" fill-rule="evenodd"></path></svg>,
+    category: 'Uncategorized',
 
     attributes: {
         title: {
@@ -91,7 +92,7 @@ registerBlockType('myplugin/team', {
 
         return (
             <div className="team-member-block">
-                {imageUrl && <img src={imageUrl} alt={imageAlt} style={{ maxWidth: '100%', height: 'auto' }} />}
+                {imageUrl && <img src={imageUrl} alt={imageAlt} />}
                 {title && <RichText.Content tagName="h2" value={title} />}
                 {content && <RichText.Content tagName="p" value={content} />}
             </div>

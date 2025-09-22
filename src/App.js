@@ -18,9 +18,8 @@ function App() {
     const [undoStack, setUndoStack] = useState([]);
     const [redoStack, setRedoStack] = useState([]);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const html = `<!-- wp:paragraph --><p>Hello world</p><!-- /wp:paragraph -->`;
-    console.log(parse(html));
-    const [blocksState, setBlocksState] = useState(() => parse(html));
+
+    const [blocksState, setBlocksState] = useState();
 
 
     const blockContent = blocksState;
@@ -68,14 +67,12 @@ function App() {
     // return (<LoadWindow/>);
 
     // return (
-
     //     <BlockEditorProvider
     //         value={blocksState}
     //         onInput={handleStateChange}
     //         onChange={handleStateChange}
     //         settings={{}}
     //     >
-
     //         <div className="bodySkeleton">
     //             {/* {isSidebarOpen && <Modal onRequestClose={() => {
     //                 setSidebarOpen(false);
@@ -105,7 +102,7 @@ function App() {
                     setSidebarOpen(false);
                 }} />} */}
                 {isSidebarOpen && <Sidebar />}
-                <ContentCanvas title={title} handleTitleChange={handleTitleChange} list={html} />
+                <ContentCanvas title={title} handleTitleChange={handleTitleChange} list={blocksState} />
             </div>
 
             <ButtonBlockAppender />
