@@ -8,17 +8,20 @@ import ContentCanvas from "./components/ContentCanvas";
 import EditorFooter from "./components/EditorFooter";
 import "@wordpress/components/build-style/style.css";
 import Sidebar from "./components/Sidebar";
-import { parse } from '@wordpress/block-serialization-default-parser';
 import LoadWindow from "./components/LoadWindow";
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
+import { parse } from "@wordpress/blocks";
+
 
 function App() {
+
     const [title, setTitle] = useState("Title");
-    const [blocksState, setBlocksState] = useState([]);
     const [undoStack, setUndoStack] = useState([]);
     const [redoStack, setRedoStack] = useState([]);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const html = `<!-- wp:paragraph --><p>Hello world</p><!-- /wp:paragraph -->`;
+    console.log(parse(html));
+    const [blocksState, setBlocksState] = useState(() => parse(html));
+
 
     const blockContent = blocksState;
 
@@ -60,27 +63,33 @@ function App() {
         setBlocksState(nextState);
     };
 
-    // const queryParams = { include: [1,2,3] }; // Return posts with ID = 1,2,3.
-
-    // apiFetch( { path: addQueryArgs( 'http://wp-demo.test/wp/v2/posts', queryParams ) } ).then( ( posts ) => {
-    //     console.log( posts );
-    // } );
-
-
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
-    const html = `
-        <!-- wp:heading -->
-        <h2 class="wp-block-heading">Heading text</h2>
-        <!-- /wp:heading -->
 
-        <!-- wp:paragraph -->
-        <p class="wp-block-paragraph">sADA</p>
-        <!-- /wp:paragraph -->
-    `;
-    // return ("")
     // return (<LoadWindow/>);
 
+    // return (
 
+    //     <BlockEditorProvider
+    //         value={blocksState}
+    //         onInput={handleStateChange}
+    //         onChange={handleStateChange}
+    //         settings={{}}
+    //     >
+
+    //         <div className="bodySkeleton">
+    //             {/* {isSidebarOpen && <Modal onRequestClose={() => {
+    //                 setSidebarOpen(false);
+    //             }} />} */}
+    //             {isSidebarOpen && <Sidebar />}
+
+    //             <ContentCanvas title={title} handleTitleChange={handleTitleChange} list={blocksState} />
+    //         </div>
+
+    //         <ButtonBlockAppender />
+
+    //         <EditorFooter />
+    //     </BlockEditorProvider>
+    // );
     return (
 
         <BlockEditorProvider
@@ -96,7 +105,7 @@ function App() {
                     setSidebarOpen(false);
                 }} />} */}
                 {isSidebarOpen && <Sidebar />}
-                <ContentCanvas title={title} handleTitleChange={handleTitleChange} />
+                <ContentCanvas title={title} handleTitleChange={handleTitleChange} list={html} />
             </div>
 
             <ButtonBlockAppender />

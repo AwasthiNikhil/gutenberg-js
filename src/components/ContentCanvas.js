@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { BlockList, BlockCanvas } from "@wordpress/block-editor";
+import { BlockList, WritingFlow } from "@wordpress/block-editor";
 import { TextControl } from "@wordpress/components";
 
-const ContentCanvas = ({ title, handleTitleChange }) => {
+const ContentCanvas = ({ title, handleTitleChange, list }) => {
+
   return (
     <div
       className="contentCanvas"
@@ -11,8 +12,9 @@ const ContentCanvas = ({ title, handleTitleChange }) => {
         value={title}
         onChange={(nextTitle) => handleTitleChange(nextTitle ?? '')}
       />
-
-      <BlockList />
+      <WritingFlow>
+        <BlockList />
+      </WritingFlow>
 
     </div>
   );
