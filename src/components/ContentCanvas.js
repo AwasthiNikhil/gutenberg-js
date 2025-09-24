@@ -1,21 +1,29 @@
 import React, { useState } from "react";
-import { BlockList, WritingFlow } from "@wordpress/block-editor";
+import { BlockList, WritingFlow, BlockInspector } from "@wordpress/block-editor";
 import { TextControl } from "@wordpress/components";
+import { useEntityProp } from '@wordpress/core-data';
 
-const ContentCanvas = ({ title, handleTitleChange, list }) => {
+const ContentCanvas = ({ list }) => {
+  // Get the post title and setter from WordPress entity props
+  const [ title, setTitle ] = useEntityProp('postType', 'post', 'title');
 
   return (
-    <div
-      className="contentCanvas"
-    >
+    <div className="contentCanvas">
       <TextControl
+        label="Post Title"
         value={title}
-        onChange={(nextTitle) => handleTitleChange(nextTitle ?? '')}
+        onChange={(nextTitle) => setTitle(nextTitle)}
       />
-      <WritingFlow>
-        <BlockList />
-      </WritingFlow>
-
+      <div style={{ display: 'flex' }}>
+        <div style={{ width: '80%' }}>
+          <WritingFlow>
+            <BlockList />
+          </WritingFlow>
+        </div>
+        <div style={{ width: '20%' }}>
+          <BlockInspector />
+        </div>
+      </div>
     </div>
   );
 };

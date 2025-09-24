@@ -1,5 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
+import { InspectorControls, RichText, 	BlockControls,
+	__experimentalBlockAlignmentMatrixControl as BlockAlignmentMatrixControl, } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { FormFileUpload, TextControl, TextareaControl } from '@wordpress/components';
 
@@ -53,8 +54,28 @@ registerBlockType('myplugin/team', {
         const handleDescriptionChange = (value) => {
             setAttributes({ content: value });
         };
+        const { contentPosition } = attributes;
+        return (<>
+            <BlockControls>
+                <BlockAlignmentMatrixControl
+                    label={__('Change content position')}
+                    value={contentPosition}
+                    onChange={(nextPosition) =>
+                        setAttributes({
+                            contentPosition: nextPosition,
+                        })
+                    }
+                />
+            </BlockControls>
+            <InspectorControls>
+                <div>
+                    <h1> Hi
+                    </h1>
+                </div>
 
-        return (
+            </InspectorControls>
+
+
             <div style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px' }}>
                 {/* Image upload */}
                 <FormFileUpload
@@ -84,6 +105,8 @@ registerBlockType('myplugin/team', {
                     placeholder="Description"
                 />
             </div>
+
+        </>
         );
     },
 

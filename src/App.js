@@ -6,11 +6,10 @@ import "./index.css";
 import { Modal } from "@wordpress/components";
 import ContentCanvas from "./components/ContentCanvas";
 import EditorFooter from "./components/EditorFooter";
-import "@wordpress/components/build-style/style.css";
 import Sidebar from "./components/Sidebar";
 import LoadWindow from "./components/LoadWindow";
-import { parse } from "@wordpress/blocks";
-
+// import '@wordpress/components/build-style/style.css';
+// import '@wordpress/block-editor/build-style/style.css';
 
 function App() {
 
@@ -66,27 +65,6 @@ function App() {
 
     // return (<LoadWindow/>);
 
-    // return (
-    //     <BlockEditorProvider
-    //         value={blocksState}
-    //         onInput={handleStateChange}
-    //         onChange={handleStateChange}
-    //         settings={{}}
-    //     >
-    //         <div className="bodySkeleton">
-    //             {/* {isSidebarOpen && <Modal onRequestClose={() => {
-    //                 setSidebarOpen(false);
-    //             }} />} */}
-    //             {isSidebarOpen && <Sidebar />}
-
-    //             <ContentCanvas title={title} handleTitleChange={handleTitleChange} list={blocksState} />
-    //         </div>
-
-    //         <ButtonBlockAppender />
-
-    //         <EditorFooter />
-    //     </BlockEditorProvider>
-    // );
     return (
 
         <BlockEditorProvider

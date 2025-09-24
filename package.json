@@ -45,5 +45,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://wp-demo.test"
+  "proxy": "http://wp-demo.test",
+  "devDependencies": {
+    "@wordpress/base-styles": "^6.7.0"
+  }
 }
